@@ -1,0 +1,67 @@
+#1 Cities in the USA = 274
+SELECT COUNT(Name) FROM city WHERE CountryCode='USA';
+
+#2 Population & Life expectancy in Argentina = 37,032,000 & 75.1
+SELECT Population, LifeExpectancy FROM country WHERE Name = 'Argentina';
+
+#3 Which country has the highest life expectancy? Andorra 83.5
+SELECT Name, LifeExpectancy FROM country WHERE LifeExpectancy IS NOT NULL ORDER BY LifeExpectancy DESC LIMIT 5;
+
+#4 Using JOIN ... ON find the capital of Spain = Madrid
+SELECT * FROM country c1
+JOIN city c2 ON c1.Capital=c2.ID;
+
+#5 Using JOIN ... ON list all the languages spoken in the Southeast Asia region = 65
+SELECT language, region FROM countrylanguage l 
+JOIN country c ON l.CountryCode=c.Code WHERE c.Region = 'Southeast Asia';
+
+#6 Using a single query, list 25 cities around the world that start with the letter F = 
+# ID, Name, CountryCode, District, Population
+'54', 'Fagatogo', 'ASM', 'Tutuila', '2323'
+'88', 'Florencio Varela', 'ARG', 'Buenos Aires', '315432'
+'110', 'Formosa', 'ARG', 'Formosa', '147636'
+'205', 'Francistown', 'BWA', 'Francistown', '101805'
+'210', 'Fortaleza', 'BRA', 'CearÃ¡', '2097757'
+'236', 'Feira de Santana', 'BRA', 'Bahia', '479992'
+'269', 'Franca', 'BRA', 'SÃ£o Paulo', '290139'
+'274', 'FlorianÃ³polis', 'BRA', 'Santa Catarina', '281928'
+'280', 'Foz do IguaÃ§u', 'BRA', 'ParanÃ¡', '259425'
+'357', 'Ferraz de Vasconcelos', 'BRA', 'SÃ£o Paulo', '139283'
+'381', 'Francisco Morato', 'BRA', 'SÃ£o Paulo', '121197'
+'398', 'Franco da Rocha', 'BRA', 'SÃ£o Paulo', '108964'
+'684', 'Fuenlabrada', 'ESP', 'Madrid', '171173'
+'1055', 'Faridabad', 'IND', 'Haryana', '703592'
+'1143', 'Firozabad', 'IND', 'Uttar Pradesh', '215128'
+'1157', 'Farrukhabad-cum-Fatehgarh', 'IND', 'Uttar Pradesh', '194567'
+'1261', 'Faizabad', 'IND', 'Uttar Pradesh', '124437'
+'1280', 'Fatehpur', 'IND', 'Uttar Pradesh', '117675'
+'1471', 'Firenze', 'ITA', 'Toscana', '376662'
+'1488', 'Foggia', 'ITA', 'Apulia', '154891'
+'1492', 'Ferrara', 'ITA', 'Emilia-Romagna', '132127'
+'1502', 'ForlÃ¬', 'ITA', 'Emilia-Romagna', '107475'
+'1539', 'Fukuoka', 'JPN', 'Fukuoka', '1308379'
+'1551', 'Funabashi', 'JPN', 'Chiba', '545299'
+'1575', 'Fukuyama', 'JPN', 'Hiroshima', '376921'
+
+SELECT * FROM city WHERE Name LIKE 'F%' LIMIT 25;
+
+#7 Using COUNT and JOIN ... ON, get the number of cities in China = 363
+SELECT COUNT(ID) FROM city c1
+JOIN country c2 ON c1.CountryCode=c2.Code WHERE c2.Name = 'China';
+
+#8 Using IS NOT NULL, ORDER BY, and LIMIT, which country has the lowest population? Pitcairn, 50
+SELECT Population, Name FROM country WHERE Population IS NOT NULL AND Population >0 ORDER BY Population ASC;
+
+#9 Using aggregate functions, return the number of countries the database contains = 239
+SELECT COUNT(Code) FROM country;
+
+#10 What are the top ten largest countries by area? 
+=Russian Federation, Antarctica, Canada, China, US, Brazil, Australia, India, Argentina, Kazakstan
+
+SELECT SurfaceArea, Name FROM country ORDER BY SurfaceArea DESC LIMIT 10;
+
+#11 List the five largest cities by population in Japan 
+= Tokyo, Jokohama, Osaka, Nagoya, Sapporo
+
+SELECT * FROM city 
+JOIN country ON city.CountryCode = country.Code WHERE country.Name = 'Japan' LIMIT 5;
